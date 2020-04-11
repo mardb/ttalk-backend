@@ -1,15 +1,17 @@
 const express = require('express');
-const bodyParser = require('body-parser')
-const app = express()
+// const bodyParser = require('body-parser')
 
+const app = express()
 const PORT = process.env.PORT || 4000
 
+//routs
+const authRoutes = require('./routes/auth')
 
-app.get('/api/v1/signup', (req, res) => {
-  res.json({
-      data: 'this is the signup page'
-  })
-})
+//middleware
+app.use('/api/v1', authRoutes)
 
+// app.get('/', (req, res) => {
+//   res.send('api page');
+// })
 
 app.listen(PORT, () => console.log(`Server is running at localhost:${PORT}`))
