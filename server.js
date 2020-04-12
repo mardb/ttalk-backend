@@ -40,4 +40,4 @@ app.use('/api/v1', authRoutes)
 const PORT = process.env.PORT || 4000
 
 app.listen(PORT, () => {console.log(`Server is running at port: ${PORT}`)
-})
+});
