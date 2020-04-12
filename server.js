@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const mongoose = require('mongoose')
 require('dotenv').config()
-// const DB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/project3';
+const DB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/project3';
 
 
 const app = express()
@@ -12,11 +12,11 @@ const PORT = process.env.PORT || 4000
 
 // index.js 
 //connect to db
-mongoose.connect(process.env.DB, {
+mongoose.connect(DB_URI, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 })
 .then(() => console.log('MongoDB connected successfully.'))
 .catch(err => console.log('MongoDB connection error: ',err))
@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 
 //middleware
-app.use('/api/v1', authRoutes)
+app.use('/api', authRoutes)
 app.use(cors()); //allows all origins
 
 
