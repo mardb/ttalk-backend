@@ -31,7 +31,7 @@ if((process.env.NODE_ENV = 'development')){ //change later to localhost
   app.use(cors({origin:`http://localhost:3000`}))
 }
 //middleware
-app.use('/api/v1', authRoutes)
+app.use('/api', authRoutes)
  
 // app.get('/', (req, res) => {
 //   res.send('api page');
