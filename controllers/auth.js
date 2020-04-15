@@ -2,6 +2,8 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 //sendgrid
 const sgMail = require("@sendgrid/mail");
+const expressJWT = require('express-jwt')
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // exports.signup = (req, res) => {
@@ -141,3 +143,10 @@ exports.signin = (req, res) => {
     });
   });
 };
+// -----------------------------------------------------------------
+
+//endpoints checks webtoken validity and exp. If true, give access. 
+//validates data and makes it available in req.user
+exports.requireSignin = expressJWT({
+  secret: process.env.JWT_SECRET
+});
