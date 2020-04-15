@@ -9,6 +9,9 @@ exports.read = (req, res) => {
         error: 'User not found.'
       })
     }
+    //this i super important, removes user salt/hash
+    user.hashed_password = undefined
+    user.salt = undefined
     res.json(user)
   })
 }
