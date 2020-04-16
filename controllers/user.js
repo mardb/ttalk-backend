@@ -15,3 +15,7 @@ exports.read = (req, res) => {
     res.json(user)
   })
 }
+
+exports.update = (req, res) => {
+  console.log('UpdateUser:', req.user, 'Update data:', req.body)
+}
