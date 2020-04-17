@@ -16,8 +16,8 @@ const {
   userSigninValidator,
   forgotPasswordValidator,
   resetPasswordValidator,
-} = require("../validators/auth");
-const { runValidation } = require("../validators/index");
+} = require("../validator/auth");
+const { runValidation } = require("../validator/index");
 
 router.post("/signup", userSignupValidator, runValidation, signup);
 router.post("/account-activation", accountActivation);
