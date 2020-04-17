@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const expressValidator = require('express-validator')
 require("dotenv").config();
 // const DB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/project03';
 
@@ -29,6 +30,8 @@ const postRoutes = require("./routes/post")
 //morgan first
 app.use(morgan("dev"));
 app.use(bodyParser.json());
+// app.use(expressValidator())
+
 // app.use(cors()); //allows all origins
 // if(process.env.NODE_ENV = 'localhost:3000') //change later
 if ((process.env.NODE_ENV = "development")) {
@@ -40,6 +43,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 //posts
 app.use('/', postRoutes)
+
 // or 
 // app.use('/api', postRoutes)
 
