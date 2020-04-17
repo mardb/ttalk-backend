@@ -23,6 +23,7 @@ mongoose
 //routes
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const postRoutes  = require("./routes/post")
 //morgan first
 app.use(morgan("dev"));
 app.use(bodyParser.json());
