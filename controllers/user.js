@@ -8,7 +8,10 @@ exports.read = (req, res) => {
         error: "User not found.",
       });
     }
+
     //this i super important, removes user salt/hash
+    // set as null instead of undefined according to Carson. 
+
     user.hashed_password = undefined;
     user.salt = undefined;
     res.json(user);
