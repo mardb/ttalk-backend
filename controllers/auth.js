@@ -2,7 +2,7 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 //sendgrid
 const sgMail = require("@sendgrid/mail");
-const expressJWT = require('express-jwt')
+const expressJWT = require("express-jwt");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -145,8 +145,52 @@ exports.signin = (req, res) => {
 };
 // -----------------------------------------------------------------
 
-//endpoints checks webtoken validity and exp. If true, give access. 
+//endpoints checks webtoken validity and exp. If true, give access.
 //validates data and makes it available in req.user
 exports.requireSignin = expressJWT({
-  secret: process.env.JWT_SECRET
+  secret: process.env.JWT_SECRET,
 });
+
+exports.forgotPassword = (req, res) => {
+  const { email } = req.body;
+
+  User.findOne({ email }, (err, user) => {
+    if (err || !user) {
+      return res.status(400).json({
+        error: "User with that email does not exist",
+      });
+    }
+
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_RESET_PASSWORD, {
+      expiresIn: "15m",
+    });
+
+    const emailData = {
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: `Password Reset link from TinkleTalk.`,
+      html: `
+              <h1>Please use the following link to reset your password</h1>
+              <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
+              <hr />
+              <p>This email may contain sensitive information</p>
+              <p>${process.env.CLIENT_URL}</p>
+          `,
+    };
+
+    sgMail
+      .send(emailData)
+      .then((sent) => {
+        return res.json({
+          message: `Email has been sent to ${email}. Follow the instruction to activate your account`,
+        });
+      })
+      .catch((err) => {
+        return res.json({
+          message: err.message,
+        });
+      });
+  });
+};
+
+// exports.resetPassword = {req, res} => {}
