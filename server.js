@@ -23,7 +23,9 @@ mongoose
 //routes
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
-const postRoutes  = require("./routes/post")
+const postRoutes = require("./routes/post")
+
+
 //morgan first
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -36,6 +38,12 @@ if ((process.env.NODE_ENV = "development")) {
 //middleware
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+//posts
+app.use('/', postRoutes)
+// or 
+// app.use('/api', postRoutes)
+
+
 
 const PORT = process.env.PORT || 4000;
 

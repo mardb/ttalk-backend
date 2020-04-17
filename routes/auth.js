@@ -23,6 +23,9 @@ router.post("/signup", userSignupValidator, runValidation, signup);
 router.post("/account-activation", accountActivation);
 router.post("/signin", userSigninValidator, runValidation, signin);
 
+//posts
+// router.get('/posts', getPosts)
+
 //forgot reset password
 router.put(
   "/forgot-password",
