@@ -29,11 +29,11 @@ router.put(
   runValidation,
   forgotPassword
 );
-// router.put(
-//   "/reset-password",
-//   resetPasswordValidator,
-//   runValidation,
-//   resetPassword
-// );
+router.put(
+  "/reset-password",
+  resetPasswordValidator,
+  runValidation,
+  resetPassword
+);
 
 module.exports = router;
