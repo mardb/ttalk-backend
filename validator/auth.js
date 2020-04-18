@@ -1,6 +1,6 @@
 //any auth related validators
-
-const { check } = require("express-validator");
+const { check, validationResult} = require("express-validator/check");
+// const express
 
 exports.userSignupValidator = [
   //check for name
@@ -39,27 +39,28 @@ exports.resetPasswordValidator = [
 ];
 // posts
 
-exports.createPostValidator = (req, res, next) => {
-  // title
-  req.check('title', 'Write a title').notEmpty();
-  req.check('title', 'Title must be between 4 to 150 characters').isLength({
-      min: 4,
-      max: 150
-  });
-  // body
-  req.check('body', 'Write a body').notEmpty();
-  req.check('body', 'Body must be between 4 to 2000 characters').isLength({
-      min: 4,
-      max: 2000
-  });
-  // check for errors
-  const errors = req.validationErrors();
-  // only  shows first error
-  if (errors) {
-      const firstError = errors.map(error => error.msg)[0];
-      return res.status(400).json({ error: firstError });
-  }
-  // proceed to next middleware
-  next();
-};
+// exports.createPostValidator = (req, res, next) => {
+//   // title
+//   check('title', 'Write a title').not().isEmpty();
+//   check('title', 'Title must be between 4 to 150 characters').isLength({
+//       min: 4,
+//       max: 150
+//   });
+//   // body
+//   check('body', 'Write a body').not().isEmpty();
+//   check('body', 'Body must be between 4 to 2000 characters').isLength({
+//       min: 4,
+//       max: 2000
+//   });
+//   // check for errors
+//   const errors = req.validationErrors();
+//   // const errors = validationErrors();
+//   // only  shows first error
+//   if (errors) {
+//       const firstError = errors.map(error => error.msg)[0];
+//       return res.status(400).json({ error: firstError });
+//   }
+//   // proceed to next middleware
+//   next();
+// };
 

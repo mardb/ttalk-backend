@@ -30,7 +30,7 @@ const postRoutes = require("./routes/post")
 //morgan first
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-// app.use(expressValidator())
+app.use(expressValidator())
 
 // app.use(cors()); //allows all origins
 // if(process.env.NODE_ENV = 'localhost:3000') //change later
