@@ -14,10 +14,10 @@ const postSchema = new mongoose.Schema({
     //     type: ObjectId,
     //     ref: 'User'
     // },
-    // created: {
-    //     type: Date,
-    //     default: Date.now
-    // },
+    created: {
+        type: Date,
+        default: Date.now
+    },
     // updated: Date,
     // comments: [
     //     {
