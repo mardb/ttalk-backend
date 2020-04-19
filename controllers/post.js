@@ -31,16 +31,15 @@ exports.updatePost = (req, res) => {
 // DELETE City Destroy
 exports.deletePost = (req, res) => {
   // res.sendStatus(200);
-  Post.findByIdAndDelete(req.params.id, (err, deletedPost) => {
+  Post.findByIdAndDelete(req.params.id), (err, deletedPost) => {
     if (err) return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
     res.json(deletedPost);
-  });
+  };
 }
 
-// exports.updatePost = (req, res ) => {
-//   const post = Post.findByIdAndUpdate()
-//   .then( post => {
-//     res.json({ })
-//   })
-//   .catch(err => console.log(err))
-//  } ;
+exports.showPost = (req, res) => {
+  Post.findById(req.params.id, (err, foundPost) => {
+      if (err) return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
+      res.json(foundPost);
+  });
+}
